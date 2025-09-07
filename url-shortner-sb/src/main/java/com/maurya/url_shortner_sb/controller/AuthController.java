@@ -1,8 +1,10 @@
 package com.maurya.url_shortner_sb.controller;
 
 
+import com.maurya.url_shortner_sb.dtos.LoginRequest;
 import com.maurya.url_shortner_sb.dtos.RegisterRequest;
 import com.maurya.url_shortner_sb.models.User;
+import com.maurya.url_shortner_sb.security.jwt.JwtAuthenticationResponse;
 import com.maurya.url_shortner_sb.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private UserService userService;
+
+    @PostMapping("/public/login")
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest){
+        return ResponseEntity.ok(userService.authenticateUser(loginRequest));
+    }
+
     @PostMapping("/public/register")
     public ResponseEntity<?> registerUser(@RequestBody RegisterRequest registerRequest){
         User user = new User();
