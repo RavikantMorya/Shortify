@@ -12,7 +12,7 @@ public class UrlMapping {
     @Id
     private Long id;
     private String original_url;
-    private String short_url;
+    private String shortUrl;
     private int clickCount=0;
     private LocalDateTime createdDate;
     @ManyToOne
