@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from "framer-motion";
 import Card from './Card';
+import { useStoreContext } from '../ContextApi/ContextApi';
 
 
 let desc =
@@ -9,6 +10,7 @@ let desc =
 
 const LandingPage = () => {
 
+     const {token} = useStoreContext()
      const dashBoardNavigateHandler = () => {
 
   };

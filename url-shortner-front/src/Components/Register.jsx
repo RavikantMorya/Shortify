@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 
 const Register = () => {
 
-       const navigate =  useNavigate();
+    const navigate =  useNavigate();
     const [loader, setLoader] = useState(false)
 
     const {
@@ -28,17 +28,15 @@ const Register = () => {
     });
 
     const registerHandler = async (data) => {
-        console.log("Backend URL:", import.meta.env.VITE_BACKEND_URL);
         setLoader(true);
         try {
             const {data:response} = await api.post('/api/auth/public/register',data);
             reset();
             navigate("/login")
-            
             console.log(response);
             toast.success("Registered Successfully!");
         } catch (error) {
-            console.error(error);
+            console.error("Reporting Error"+error);
             toast.error("Something Went Wrong.")
         }finally{
             setLoader(false);

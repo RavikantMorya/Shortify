@@ -5,12 +5,14 @@ import TextField from './TextField';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../api/api';
 import toast from 'react-hot-toast';
+import { useStoreContext } from '../ContextApi/ContextApi';
 
 
-const LoginPage = () => {
-
+const LoginPage = () => {    
     const navigate =  useNavigate();
     const [loader, setLoader] = useState(false)
+    const {setToken} = useStoreContext()
+    //const {setToken} = useStoreContext()
 
     const {
     register,
@@ -30,11 +32,14 @@ const LoginPage = () => {
         setLoader(true);
         try {
             const {data:response} = await api.post('api/auth/public/login',data);
-            reset();
-            navigate("/")
-            localStorage.setItem('token',response.token)            
+
+            setToken(response.token);
+            localStorage.setItem('JWT_TOKEN',JSON.stringify(response.token))  
+            toast.success("Registered Successfully!");        
             console.log(response.token);
-            // toast.success("Registered Successfully!");
+            reset();
+            navigate("/dashboard")
+
         } catch (error) {
             console.error(error);
             toast.error("Something Went Wrong.")
