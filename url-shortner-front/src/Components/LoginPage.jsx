@@ -35,7 +35,6 @@ const LoginPage = () => {
 
             setToken(response.token);
             localStorage.setItem('JWT_TOKEN',JSON.stringify(response.token))  
-            toast.success("Registered Successfully!");        
             console.log(response.token);
             reset();
             navigate("/dashboard")
