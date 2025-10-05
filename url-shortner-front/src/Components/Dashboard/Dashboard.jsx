@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Graph from './Graph'
 import { dummyData } from '../../dummyData/data'
 import { useFetchTotalClicks } from '../../hooks/useQuery'
 import { useStoreContext } from '../../ContextApi/ContextApi'
 import { useNavigate } from 'react-router-dom'
 import Loader from '../Loader'
+import ShortenPopup from './ShortenPopup'
 
 const Dashboard = () => {
 
     const {token} = useStoreContext();
-    const {navigate} = useNavigate()
+    const refetch = false
+    const {navigate} = useNavigate();
+    const [shortenPopup, setShortenPopUp] = useState(false)
 
    // console.log(useFetchTotalClicks(token,onError))
     const {isLoading:loader,data:totalClicks} = useFetchTotalClicks(token,onError)
@@ -40,7 +43,21 @@ const Dashboard = () => {
           )}
           <Graph graphData={totalClicks} /> 
          </div>
+
+          <div className='py-5 sm:text-end text-center'>
+                <button
+                    className='bg-custom-gradient px-4 py-2 rounded-md text-white'
+                    onClick={() => setShortenPopUp(true)} >
+                    Create a New Short URL
+                </button>
+            </div>
+            
+      <ShortenPopup
+       refetch = {refetch}
+       open = {shortenPopup}
+       setOpen = {setShortenPopUp}/>
       </div>
+
         )
       }
 

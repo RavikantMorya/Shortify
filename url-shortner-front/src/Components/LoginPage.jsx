@@ -35,7 +35,7 @@ const LoginPage = () => {
 
             setToken(response.token);
             localStorage.setItem('JWT_TOKEN',JSON.stringify(response.token))  
-            console.log(response.token);
+          //  console.log(response.token);
             reset();
             navigate("/dashboard")
 
