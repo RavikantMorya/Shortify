@@ -1,16 +1,33 @@
 import { useQuery } from "react-query"
 import api from "../api/api"
 
-// export const useFetchMyShortUrls = (token,onError) => {
-//     return useQuery(
-//         "my-shortenurls",
-//         async () => {
-//             return await api.get(
-//                 "/api/urls/myurls"
-//             )
-//         }
-//     )
-// }
+export const useFetchMyShortUrls=(token,onError) => {
+    return useQuery("myurls",
+        async()=>{
+            return await api.get(
+                "/api/urls/myurls",
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        Authorization: "Bearer "+token,
+                    },
+                }
+            );
+        },
+        {
+            select:(data) =>{
+               // console.log(data);  
+                const sortedurlList= data.data.sort(
+                     (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
+                )
+                return sortedurlList;
+            },
+            onError,
+            staleTime:5000
+        }
+    );
+};
 
 export const useFetchTotalClicks=(token,onError) => {
     return useQuery("url-totalclick",
