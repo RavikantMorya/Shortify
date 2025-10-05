@@ -18,6 +18,8 @@ public class RedirectController {
 
     private UrlMappingService urlMappingService;
 
+    //Increase Click count of the given shorturl
+    //localhost:8080/shorturl
     @GetMapping("{shortUrl}")
     public ResponseEntity<Void> redirect(@PathVariable String shortUrl){
 

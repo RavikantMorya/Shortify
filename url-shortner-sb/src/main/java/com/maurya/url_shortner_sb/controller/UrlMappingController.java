@@ -24,8 +24,9 @@ public class UrlMappingController {
     private UserService userService;
     private UrlMappingService urlMappingService;
 
-    //{originalUrl:'https://www.google.com'}
-    @GetMapping("/shorten")
+    //input-> {originalUrl:'https://www.google.com'} output-> Short URL
+   // @GetMapping("/shorten")
+   @PostMapping("/shorten")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> createShortUrl(@RequestBody Map<String,String> request, Principal principal){
         String originalUrl = request.get("originalUrl");
@@ -35,6 +36,7 @@ public class UrlMappingController {
         return ResponseEntity.ok(urlMappingDto);
     }
 
+    //input-> NA output-> returns all urls of logged in user
     @GetMapping("/myurls")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> getUserUrls(Principal principal){
@@ -46,7 +48,7 @@ public class UrlMappingController {
 
 
 
-
+    //input-> shortUrl, startdate, enddate output-> returns date wise click count of the given shorturl between start and end date
     @GetMapping("/analytics/{shortUrl}")
     @PreAuthorize("hasRole('USER')")
     ResponseEntity<List<ClickEventDto>> getUrlAnalytics(@PathVariable String shortUrl,
@@ -60,6 +62,7 @@ public class UrlMappingController {
 
     }
 
+    //input-> startdate and enddate output-> returns datewise totalclicks of all urls for loggedin user
     @GetMapping("/totalClicks")
     @PreAuthorize("hasRole('USER')")
     ResponseEntity<Map<LocalDate,Long>> getTotalClicksByDate(Principal principal,
