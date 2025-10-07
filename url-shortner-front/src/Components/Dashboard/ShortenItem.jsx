@@ -46,7 +46,7 @@ const ShortenItem = ({createdDate,original_url,short_url,clickCount}) => {
             setSelectedUrl("");
             
         } catch (error) {
-             navigate("/error");
+            navigate("/error");
             console.log(error);
         }finally{
             setLoader(false)

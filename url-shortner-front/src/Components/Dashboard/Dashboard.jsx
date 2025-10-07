@@ -12,14 +12,13 @@ import ShortenUrlList from './ShortenUrlList'
 const Dashboard = () => {
 
     const {token} = useStoreContext();
-    //const refetch = false
-    const {navigate} = useNavigate();
+    const navigate = useNavigate()
     const [shortenPopup, setShortenPopUp] = useState(false)
 
     const {isLoading,data:myShortenUrls,refetch} = useFetchMyShortUrls(token,onError)
     const {isLoading:loader,data:totalClicks} = useFetchTotalClicks(token,onError)
      function onError() {
-    // navigate("/error");
+     navigate("/error");
     }
 //    const {isLoading: loader, data: totalClicks} = useFetchTotalClicks(token, onError)
 
