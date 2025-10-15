@@ -7,9 +7,8 @@ function App() {
   const CurrentApp = getApps();
   return (
     <>
-
     <BrowserRouter>
-    <CurrentApp />    
+       <CurrentApp />    
     </BrowserRouter>
     </>
   )
