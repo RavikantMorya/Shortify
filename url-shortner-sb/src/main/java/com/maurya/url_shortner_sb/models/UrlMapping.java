@@ -18,7 +18,6 @@ public class UrlMapping {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
     @OneToMany(mappedBy = "urlMapping")
     private List<ClickEvents> clickEvents;
 
